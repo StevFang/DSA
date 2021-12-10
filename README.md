@@ -1,2 +1,3 @@
 # DSA
-Use java implement data structure and algorithm.
+### 数据结构与算法
+通过java实现经典的数据结构与算法, 一起领略java编程之美
