@@ -22,17 +22,36 @@ class BinaryTreeDemo {
 //        System.out.println("后序遍历");
 //        binaryTree.postOrder();
 
-        System.out.println("前序查找");
-        HeroNode heroNode = binaryTree.preOrderSearch(1);
-        System.out.println(heroNode);
+//        System.out.println("前序查找");
+//        HeroNode heroNode = binaryTree.preOrderSearch(1);
+//        System.out.println(heroNode);
+//
+//        System.out.println("中序查找");
+//        heroNode = binaryTree.infixOrderSearch(4);
+//        System.out.println(heroNode);
+//
+//        System.out.println("后序查找");
+//        heroNode = binaryTree.postOrderSearch(6);
+//        System.out.println(heroNode);
 
-        System.out.println("中序查找");
-        heroNode = binaryTree.infixOrderSearch(4);
-        System.out.println(heroNode);
+        binaryTree.preOrder();
 
-        System.out.println("后序查找");
-        heroNode = binaryTree.postOrderSearch(6);
-        System.out.println(heroNode);
+        boolean suc = binaryTree.delNode(5);
+        if (suc) {
+            System.out.println("节点5删除成功");
+        } else {
+            System.out.println("节点5不存在, 删除失败");
+        }
+        binaryTree.preOrder();
+
+        suc = binaryTree.delNode(3);
+        if (suc) {
+            System.out.println("节点3删除成功");
+        } else {
+            System.out.println("节点3不存在, 删除失败");
+        }
+        binaryTree.preOrder();
+
 
     }
 
@@ -104,6 +123,15 @@ public class BinaryTree {
             System.out.println("二叉树为空");
         }
         return null;
+    }
+
+    public boolean delNode(int no) {
+        if (this.root == null || this.root.getNo() == no) {
+            this.root = null;
+            return true;
+        } else {
+            return this.root.delNode(no);
+        }
     }
 
 }
@@ -286,6 +314,28 @@ class HeroNode {
                 "no=" + no +
                 ", name='" + name + '\'' +
                 '}';
+    }
+
+    public boolean delNode(int no) {
+        if (this.left != null && this.left.no == no) {
+            this.left = null;
+            return true;
+        }
+        if (this.right != null && this.right.no == no) {
+            this.right = null;
+            return true;
+        }
+        boolean flag = false;
+        if (this.left != null) {
+            flag = this.left.delNode(no);
+        }
+        if (flag) {
+            return true;
+        }
+        if (this.right != null) {
+            flag = this.right.delNode(no);
+        }
+        return flag;
     }
 
 }
